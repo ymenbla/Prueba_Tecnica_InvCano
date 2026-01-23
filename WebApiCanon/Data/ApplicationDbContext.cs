@@ -8,5 +8,7 @@ namespace WebApiCanon.Data
             : base(options)
         {
         }
+
+        public DbSet<Features.Machines.MachineItems> MachineItems { get; set; }
     }
 }

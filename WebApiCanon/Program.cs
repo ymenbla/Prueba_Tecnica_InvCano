@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApiCanon.Data;
+using WebApiCanon.Features.Machines;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+builder.Services.AddScoped<IMachineItemService, MachineItemService>();
 
 var app = builder.Build();
 
