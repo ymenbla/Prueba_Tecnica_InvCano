@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using WebApiCanon.Data;
 using WebApiCanon.Features.Machines;
+using WebApiCanon.Features.Metrics;
+using WebApiCanon.Features.Productions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 );
 
 builder.Services.AddScoped<IMachineItemService, MachineItemService>();
+builder.Services.AddScoped<IDailyProductionService, DailyProductionService>();
+builder.Services.AddScoped<IMachineMetricsService, MachineMetricsService>();
 
 var app = builder.Build();
 

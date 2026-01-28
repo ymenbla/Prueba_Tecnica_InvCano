@@ -7,15 +7,15 @@ namespace WebApiCanon.Features.Machines
         // READ
         Task<IReadOnlyList<MachineResponseDto>> GetAllAsync();
 
-        Task<MachineResponseDto> GetByIdAsync(int id);
+        Task<MachineResponseDto> GetByIdAsync(long id);
 
         // CREATE
         Task<MachineResponseDto> CreateAsync(CreateMachineDto dto);
 
         // UPDATE
-        Task<bool> UpdateAsync(int id, UpdateMachineDto dto);
+        Task<bool> UpdateAsync(long id, UpdateMachineDto dto);
 
-        Task<bool> DisableMachineAsync(int id);
+        Task<bool> DisableMachineAsync(long id);
 
     }
 }

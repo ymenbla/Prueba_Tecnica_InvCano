@@ -45,7 +45,7 @@ namespace WebApiCanon.Features.Machines
                 })
                 .ToListAsync();
         }
-        public async Task<MachineResponseDto?> GetByIdAsync(int id)
+        public async Task<MachineResponseDto?> GetByIdAsync(long id)
         {
             return await _context.MachineItems
                 .AsNoTracking()
@@ -59,7 +59,7 @@ namespace WebApiCanon.Features.Machines
                 })
                 .FirstOrDefaultAsync();
         }
-        public async Task<bool> UpdateAsync(int id, UpdateMachineDto dto)
+        public async Task<bool> UpdateAsync(long id, UpdateMachineDto dto)
         {
             var machine = await _context.MachineItems.FindAsync(id);
 
@@ -75,7 +75,7 @@ namespace WebApiCanon.Features.Machines
             return true;
         }
 
-        public async Task<bool> DisableMachineAsync(int id)
+        public async Task<bool> DisableMachineAsync(long id)
         {
             var machine = await _context.MachineItems.FindAsync(id);
             if (machine is null)
