@@ -12,8 +12,8 @@ using WebApiCanon.Data;
 namespace WebApiCanon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260127203253_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260202231501_UpdateRefreshTokenField")]
+    partial class UpdateRefreshTokenField
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,6 +82,45 @@ namespace WebApiCanon.Migrations
                     b.HasIndex("MachineId");
 
                     b.ToTable("DailyProductions");
+                });
+
+            modelBuilder.Entity("WebApiCanon.Features.Users.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RefreshTokenExpiresAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RefreshTokenHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("WebApiCanon.Features.Productions.DailyProduction", b =>

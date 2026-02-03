@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApiCanon.Features.Productions.DTOs;
 
 namespace WebApiCanon.Features.Productions
 {
-    [Route("api/daily-production")]
+    [Authorize]
     [ApiController]
+    [Route("api/daily-production")]
     public class DailyProductionController : ControllerBase
     {
         private readonly IDailyProductionService _service;

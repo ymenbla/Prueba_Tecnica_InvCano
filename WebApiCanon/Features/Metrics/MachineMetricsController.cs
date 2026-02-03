@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApiCanon.Features.Metrics
 {
-    [Route("api/metrics")]
+    [Authorize]
     [ApiController]
+    [Route("api/metrics")]
     public class MachineMetricsController : ControllerBase
     {
         private readonly IMachineMetricsService _machineMetricsService;

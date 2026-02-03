@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.PortableExecutable;
 using WebApiCanon.Features.Machines;
 using WebApiCanon.Features.Productions;
+using WebApiCanon.Features.Users;
 
 namespace WebApiCanon.Data
 {
@@ -14,6 +14,8 @@ namespace WebApiCanon.Data
 
         public DbSet<MachineItems> MachineItems { get; set; }
         public DbSet<DailyProduction> DailyProductions { get; set; }
+
+        public DbSet<User> Users { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{

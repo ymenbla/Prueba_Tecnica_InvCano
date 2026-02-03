@@ -45,19 +45,24 @@ namespace WebApiCanon.Features.Machines
                 })
                 .ToListAsync();
         }
-        public async Task<MachineResponseDto?> GetByIdAsync(long id)
+        public async Task<MachineResponseDto> GetByIdAsync(long id)
         {
-            return await _context.MachineItems
+            var machine = await _context.MachineItems
                 .AsNoTracking()
                 .Where(u => u.MachineId == id)
-                .Select(machine => new MachineResponseDto
+                .Select(m => new MachineResponseDto
                 {
-                    MachineId = machine.MachineId,
-                    Name = machine.Name,
-                    Code = machine.Code,
-                    IsActive = machine.IsActive,
+                    MachineId = m.MachineId,
+                    Name = m.Name,
+                    Code = m.Code,
+                    IsActive = m.IsActive,
                 })
                 .FirstOrDefaultAsync();
+
+            if (machine is null)
+                throw new InvalidOperationException($"No se encontró la máquina con id {id}.");
+
+            return machine;
         }
         public async Task<bool> UpdateAsync(long id, UpdateMachineDto dto)
         {

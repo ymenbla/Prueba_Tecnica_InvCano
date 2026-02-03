@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApiCanon.Features.Machines
 {
-    [Route("api/machines")]
+    [Authorize]
     [ApiController]
+    [Route("api/machines")]
     public class MachineItemController : ControllerBase
     {
         private readonly IMachineItemService _service;
