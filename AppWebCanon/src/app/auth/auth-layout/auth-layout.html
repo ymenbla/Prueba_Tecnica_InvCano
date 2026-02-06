@@ -3,7 +3,7 @@
 
     <div class="auth-card">
       <mat-tab-group
-        [selectedIndex]="selectedIndex"
+        [selectedIndex]="selectedIndex()"
         (selectedIndexChange)="onTabChange($event)"
       >
         <mat-tab label="Login"></mat-tab>
@@ -17,9 +17,7 @@
 
   <div class="auth-right">
     <div class="branding">
-      <mat-icon style="font-size: 80px; color: white;">
-        change_history
-      </mat-icon>
+      <mat-icon class="logo" fontIcon="home"></mat-icon>
       <h1>Angular Material Admin Full</h1>
     </div>
   </div>

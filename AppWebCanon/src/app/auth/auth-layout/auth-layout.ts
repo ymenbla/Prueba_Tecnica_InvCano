@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -9,15 +9,15 @@ import { filter } from 'rxjs';
   selector: 'app-auth-layout',
   imports: [
     RouterOutlet,
-    MatCardModule, MatTabsModule, MatIconModule
+    MatCardModule, MatTabsModule, MatIconModule,
   ],
   templateUrl: './auth-layout.html',
   styleUrl: './auth-layout.scss',
 })
 export class AuthLayout {
-    private router = inject(Router);
+  private router = inject(Router);
 
-  selectedIndex = 0;
+  selectedIndex = signal(0);
 
   constructor() {
     this.router.events
@@ -30,7 +30,8 @@ export class AuthLayout {
   }
 
   onTabChange(index: number) {
-    this.selectedIndex = index;
+
+    this.selectedIndex.set(index);
 
     if (index === 0) {
       this.router.navigate(['/auth/login']);
@@ -43,9 +44,9 @@ export class AuthLayout {
     const url = this.router.url;
 
     if (url.includes('register')) {
-      this.selectedIndex = 1;
+      this.selectedIndex.set(1);
     } else {
-      this.selectedIndex = 0;
+      this.selectedIndex.set(0);
     }
   }
 }
