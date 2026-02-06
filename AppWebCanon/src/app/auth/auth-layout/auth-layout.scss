@@ -1,0 +1,43 @@
+.auth-container {
+  display: flex;
+  height: 100vh;
+
+  .auth-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+
+    mat-tab-group {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .auth-right {
+    flex: 1;
+    background: var(--mat-sys-primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mat-sys-primary);
+
+    .branding {
+      text-align: center;
+
+      h1 {
+        margin-top: 1rem;
+        font-weight: 500;
+      }
+    }
+  }
+}

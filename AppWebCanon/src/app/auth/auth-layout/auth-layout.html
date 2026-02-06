@@ -1,0 +1,26 @@
+<div class="auth-container">
+  <div class="auth-left">
+
+    <div class="auth-card">
+      <mat-tab-group
+        [selectedIndex]="selectedIndex"
+        (selectedIndexChange)="onTabChange($event)"
+      >
+        <mat-tab label="Login"></mat-tab>
+        <mat-tab label="Register"></mat-tab>
+      </mat-tab-group>
+
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
+  <div class="auth-right">
+    <div class="branding">
+      <mat-icon style="font-size: 80px; color: white;">
+        change_history
+      </mat-icon>
+      <h1>Angular Material Admin Full</h1>
+    </div>
+  </div>
+</div>
