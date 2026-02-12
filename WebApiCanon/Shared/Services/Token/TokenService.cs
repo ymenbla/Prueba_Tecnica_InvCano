@@ -36,7 +36,7 @@ namespace WebApiCanon.Shared.Services.Token
                 audience: _config["Jwt:Audience"],
                 claims: claims,
                 expires: DateTime.UtcNow.AddMinutes(
-                    int.Parse(_config["Jwt:AccessTokenMinutes"]!)
+                    int.Parse(_config["Jwt:DurationInMinutes"]!)
                 ),
                 signingCredentials: creds
             );

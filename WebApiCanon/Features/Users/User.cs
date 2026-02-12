@@ -7,8 +7,8 @@ namespace WebApiCanon.Features.Users
     public class User
     {
         [Key]
-        public long Id { get; set; }
-        
+        public long Id { get; set; } // aqui podemos utilizar guid, pero para exemplificar o uso do refresh token, vamos usar long
+
         [Required]
         [MaxLength(150)]
         public string FullName { get; set; } = string.Empty;

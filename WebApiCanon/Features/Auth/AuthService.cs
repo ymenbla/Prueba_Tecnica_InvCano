@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using WebApiCanon.Data;
 using WebApiCanon.Features.Auth.DTOs;
 using WebApiCanon.Features.Users;
@@ -20,6 +21,29 @@ namespace WebApiCanon.Features.Auth
             _context = context;
             _tokenService = tokenService;
             _config = config;
+        }
+
+        public async Task<UserInfoResponseDto?> GetCurrentUserAsync(ClaimsPrincipal userPrincipal)
+        {
+            var nameIdentifier = userPrincipal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            
+            if (string.IsNullOrEmpty(nameIdentifier))
+                return null;
+            
+            long.TryParse(nameIdentifier, out var userId);
+
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null)
+                return null;
+
+            return new UserInfoResponseDto
+            {
+                Id = user.Id,
+                FullName = user.FullName,
+                Email = user.Email
+            };
         }
 
         public async Task RegisterAsync(RegisterRequestDto dto)

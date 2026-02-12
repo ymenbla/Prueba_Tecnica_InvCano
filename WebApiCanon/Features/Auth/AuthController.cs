@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApiCanon.Features.Auth.DTOs;
 
 
@@ -13,6 +14,18 @@ namespace WebApiCanon.Features.Auth
         public AuthController(IAuthService authService)
         {
             _authService = authService;
+        }
+
+        [HttpGet("me")]
+        [Authorize]
+        public async Task<IActionResult> Me()
+        {
+            var user = await _authService.GetCurrentUserAsync(User);
+
+            if (user == null)
+                return Unauthorized();
+
+            return Ok(user);
         }
 
         [HttpPost("register")]
