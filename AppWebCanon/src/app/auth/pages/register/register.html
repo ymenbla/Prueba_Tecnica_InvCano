@@ -1,0 +1,103 @@
+<div class="register-container">
+  <h1>Bienvenido</h1>
+  <h2>Crear tu cuenta</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Full Name -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre Completo</mat-label>
+      <input matInput placeholder="Ingrese su nombre" formControlName="fullName" required />
+      @if (f.fullName.touched && f.fullName.invalid) {
+        <mat-error>El nombre es requerido</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput type="email" placeholder="Ingrese su correo electrónico" formControlName="email" required />
+      @if (f.email.touched && f.email.invalid) {
+        <mat-error>El correo electrónico es requerido y debe ser válido</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Ingrese su contraseña" formControlName="password" required />
+      <mat-icon matSuffix matTooltip="La contraseña debe tener min 6 caracteres.">help</mat-icon>
+      <button
+      matIconButton
+      matSuffix
+      (click)="togglePasswordVisibility($event)"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide()"
+      >
+        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      @if (f.password.touched && f.password.invalid) {
+        <mat-error>La contraseña es requerida</mat-error>
+      }
+      @if ( f.password.touched && f.password.errors?.['minlength']) {
+        <mat-error>La contraseña debe tener al menos 6 caracteres</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Confirm Password -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Confirmar Contraseña</mat-label>
+      <input matInput [type]="hide() ? 'password' : 'text'" placeholder="Confirme su contraseña" formControlName="confirmPassword" required />
+      <button
+      matIconButton
+      matSuffix
+      (click)="togglePasswordVisibility($event)"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide()"
+      >
+        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      @if (f.confirmPassword.touched && f.confirmPassword.errors?.['required']) {
+        <mat-error>La confirmación de contraseña es requerida</mat-error>
+      }
+      @if ( f.confirmPassword.touched && f.confirmPassword.errors?.['minlength']) {
+        <mat-error>La confirmación debe tener al menos 6 caracteres</mat-error>
+      }
+      @if ( f.confirmPassword.touched && f.confirmPassword.errors?.['passwordMismatch']) {
+        <mat-error>Las contraseñas no coinciden</mat-error>
+      }
+
+    </mat-form-field>
+
+    <!-- Submit button -->
+    <button
+      mat-raised-button
+      color="primary"
+      class="create-btn"
+      [disabled]="registerForm.invalid || creatingAccount()"
+    >
+      <span class="btn-content">
+        <span>{{creatingAccount() ? 'Creando Cuenta...' : 'Crear Cuenta'}}</span>
+
+        @if (creatingAccount()) {
+          <mat-progress-spinner
+            diameter="18"
+            mode="indeterminate"
+            strokeWidth="3">
+          </mat-progress-spinner>
+        }
+      </span>
+    </button>
+  </form>
+
+  <!-- Divider -->
+  <div class="divider">
+    <span>o</span>
+  </div>
+
+  <!-- Google login button -->
+  <button mat-stroked-button color="primary" class="google-btn">
+    <img src="https://developers.google.com/identity/images/g-logo.png" width="20" height="20" style="margin-right:8px;">
+    Iniciar sesión con Google
+  </button>
+</div>
+

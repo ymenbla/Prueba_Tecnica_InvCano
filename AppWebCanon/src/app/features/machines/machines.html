@@ -1,0 +1,78 @@
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h2>
+    <mat-icon>precision_manufacturing</mat-icon>
+    Telares
+  </h2>
+</div>
+<mat-divider></mat-divider>
+<!-- PAGE CONTENT -->
+<div class="page-content">
+
+  <div class="content-container">
+
+    <!-- ACTIONS -->
+    <div class="page-actions">
+      <button mat-flat-button color="primary" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+        Agregar Telar
+      </button>
+    </div>
+
+    <!-- TABLE CARD -->
+    <mat-card appearance="outlined" class="table-card">
+      <mat-card-content>
+
+        <section class="table-wrapper">
+
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID -->
+            <ng-container matColumnDef="machineId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+              <td mat-cell *matCellDef="let row">{{ row.machineId }}</td>
+            </ng-container>
+
+            <!-- Code -->
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
+              <td mat-cell *matCellDef="let row">{{ row.code }}</td>
+            </ng-container>
+
+            <!-- Name -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+              <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            </ng-container>
+
+            <!-- Active -->
+            <ng-container matColumnDef="isActive">
+              <th mat-header-cell *matHeaderCellDef>Activo</th>
+              <td mat-cell *matCellDef="let row">
+                <mat-slide-toggle
+                  [checked]="row.isActive"
+                  (change)="row.isActive = $event.checked">
+                </mat-slide-toggle>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr *matNoDataRow>
+              <td class="mat-cell no-data-cell" [attr.colspan]="displayedColumns.length">
+                No hay telares registrados
+              </td>
+            </tr>
+
+          </table>
+        </section>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Paginación">
+        </mat-paginator>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

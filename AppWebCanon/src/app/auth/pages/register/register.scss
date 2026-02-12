@@ -33,6 +33,21 @@
     justify-content: center;
   }
 
+  .create-btn {
+    width: 100%;
+
+    .btn-content {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    mat-progress-spinner {
+      display: inline-block;
+    }
+  }
+
   .divider {
     text-align: center;
     margin: 1rem 0;

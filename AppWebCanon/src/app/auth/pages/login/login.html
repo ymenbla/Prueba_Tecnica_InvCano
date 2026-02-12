@@ -1,41 +1,46 @@
 <div class="login-container">
-  <h2>Welcome!</h2>
+  <h2>¡Bienvenido!</h2>
 
   <!-- Google login button -->
   <button mat-stroked-button color="primary" class="google-btn">
     <img src="https://developers.google.com/identity/images/g-logo.png" width="20" height="20" style="margin-right:8px;">
-    Sign in with Google
+    iniciar sesión con Google
   </button>
 
   <div class="divider">
-    <span>or</span>
+    <span>o</span>
   </div>
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email Address</mat-label>
+      <mat-label>Correo Electrónico</mat-label>
       <input matInput formControlName="email" type="email">
       @if (f.email.touched && f.email.invalid) {
-        <mat-error>Invalid email format</mat-error>
+        <mat-error>Formato de correo inválido</mat-error>
       }
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Password</mat-label>
+      <mat-label>Contraseña</mat-label>
       <input matInput formControlName="password" type="password">
       @if (f.password.touched && f.password.invalid) {
-        <mat-error>This field is required</mat-error>
+        <mat-error>La contraseña es requerida</mat-error>
       }
     </mat-form-field>
 
     <div class="actions">
-      <button
-        mat-flat-button color="primary"
-        [disabled]="loginForm.invalid || loading()"
-      >
-        {{ loading() ? 'Loading...' : 'Login' }}
-      </button>
-      <a href="#">Forget password</a>
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <button
+          mat-flat-button color="primary"
+          [disabled]="loginForm.invalid || loading()"
+        >
+          {{ loading() ? 'Cargando...' : 'Iniciar Sesión' }}
+        </button>
+        @if (loading()) {
+          <mat-spinner diameter="24"></mat-spinner>
+        }
+      </div>
+      <a href="#">¿Olvidaste tu contraseña?</a>
     </div>
   </form>
 

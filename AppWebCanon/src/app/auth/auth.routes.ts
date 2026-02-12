@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthLayout } from './index';
+import { AuthLayout } from '@auth/index';
 
 export const AUTH_ROUTES: Routes = [
   {
@@ -8,11 +8,11 @@ export const AUTH_ROUTES: Routes = [
     children: [
       {
         path: 'login',
-        loadComponent: () => import('./login/login').then(m => m.Login),
+        loadComponent: () => import('./pages/login/login').then(p => p.Login),
       },
       {
         path: 'register',
-        loadComponent: () => import('./register/register').then(m => m.Register),
+        loadComponent: () => import('./pages/register/register').then(p => p.Register),
       },
       {
         path: '',

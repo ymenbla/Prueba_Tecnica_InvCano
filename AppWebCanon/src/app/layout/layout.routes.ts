@@ -7,15 +7,29 @@ export const LAYOUT_ROUTES: Routes = [
     component: Layout,
     children: [
       {
-        path: 'dashboard',
-        // loadComponent: () =>
-        //   import('../dashboard/dashboard.component').then(
-        //     (m) => m.DashboardComponent
-        //   ),
+        path: 'machines',
+        loadComponent: () =>
+          import('../features/machines/machines').then(
+            (m) => m.Machines
+          ),
+      },
+      {
+        path: 'daily-production',
+        loadComponent: () =>
+          import('../features/daily-production/daily-production').then(
+            (m) => m.DailyProduction
+          ),
+      },
+      {
+        path: 'metrics',
+        loadComponent: () =>
+          import('../features/metrics/metrics').then(
+            (m) => m.Metrics
+          ),
       },
       {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'machines',
         pathMatch: 'full',
       },
     ],

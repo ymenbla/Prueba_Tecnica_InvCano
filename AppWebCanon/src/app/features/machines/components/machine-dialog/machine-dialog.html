@@ -1,0 +1,46 @@
+<h3 mat-dialog-title>
+  Agregar Telar
+</h3>
+
+<mat-dialog-content>
+
+  <form [formGroup]="machineForm" class="dialog-form">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput formControlName="code">
+      <mat-icon
+      matTooltip="Solo letras (A-Z), números (0-9) y guiones (-). Ej: TELAR-01"
+      matTooltipPosition="right"
+      matSuffix>
+          help_outline
+      </mat-icon>
+      @if (f.code.touched && f.code.errors?.['required']) {
+        <mat-error>El código es requerido</mat-error>
+      }
+      @if (f.code.touched && f.code.errors?.['pattern']) {
+        <mat-error>El código debe contener solo letras, números y guiones</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name">
+      @if (f.name.touched && f.name.errors?.['required']) {
+        <mat-error>El nombre es requerido</mat-error>
+      }
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="machineForm.invalid || saving()">
+    {{saving() ? 'Guardando...' : 'Guardar'}}
+  </button>
+  @if (saving()) {
+    <mat-spinner diameter="18"></mat-spinner>
+  }
+</mat-dialog-actions>

@@ -1,0 +1,48 @@
+<mat-drawer-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-drawer #sidenav mode="side" [opened]="sidebarOpen()" class="sidenav">
+    <mat-toolbar class="sidebar-header" >
+      <!-- Logo -->
+      <div class="logo-container">
+        <!-- <img src="/Logotipo-Finaexus.webp" alt="App Logo" class="app-logo"> -->
+      </div>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/app/machines" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>precision_manufacturing</mat-icon>
+        <span matListItemTitle>Telares</span>
+      </a>
+      <a mat-list-item routerLink="/app/daily-production" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>trolley</mat-icon>
+        <span matListItemTitle>Producción Diaria</span>
+      </a>
+      <a mat-list-item routerLink="/app/metrics" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>bar_chart</mat-icon>
+        <span matListItemTitle>Métricas</span>
+      </a>
+
+    </mat-nav-list>
+  </mat-drawer>
+
+  <!-- Main Content -->
+  <mat-drawer-content>
+    <mat-toolbar class="topbar">
+      <button mat-icon-button (click)="toggleSidebar()">
+        <mat-icon>{{ sidebarOpen() ? 'chevron_left' : 'menu' }}</mat-icon>
+      </button>
+      <span class="app-title"></span>
+      <span class="spacer"></span>
+      <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

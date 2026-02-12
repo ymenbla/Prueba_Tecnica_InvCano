@@ -1,11 +1,16 @@
 // Pages
-export * from './login/login';
-export * from './register/register';
-export * from './auth-layout/auth-layout';
+export * from './pages/login/login';
+export * from './pages/register/register';
+export * from './pages/auth-layout/auth-layout';
 
 // Guards
-export * from './auth-guard';
+export * from './guards/auth-guard';
+export * from './guards/guest-guard';
 
 // Services
-export * from './auth-service';
+export * from './services/auth-service';
+
+// Types
+export * from './types/loginRequest.interface';
+export * from './types/registerRequest.interface';
 

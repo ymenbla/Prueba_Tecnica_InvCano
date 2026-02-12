@@ -12,8 +12,15 @@ html {
     color: (
       primary: mat.$azure-palette,
       tertiary: mat.$blue-palette,
+      error: mat.$red-palette,
     ),
-    typography: Roboto,
+    typography: (
+      plain-family: Roboto,
+      // brand-family: Open Sans,
+      bold-weight: 900,
+      medium-weight: 500,
+      regular-weight: 300,
+    ),
     density: 0,
   ));
 }
@@ -36,3 +43,17 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+
+ table {
+    width: 100%;
+  }
+
+
+  td.mat-mdc-cell {
+    // padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--mat-sys-surface-dim);
+  }
+
+  tr.mat-mdc-row:hover {
+    background: var(--mat-sys-surface-container-low)
+  }
