@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: dev_mssql_server_2022
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Mssql2022*"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+  backend:
+    container_name: canon_api
+    build:
+      context: ./WebApiCanon
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mssql
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=CanonDb;User Id=sa;Password=Mssql2022*;TrustServerCertificate=True;
+    restart: always
+
+  frontend:
+    container_name: canon_webapp
+    build:
+      context: ./AppWebCanon
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  mssql_data:

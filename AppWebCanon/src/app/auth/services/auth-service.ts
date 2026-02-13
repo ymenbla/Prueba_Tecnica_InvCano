@@ -20,29 +20,24 @@ private http = inject(HttpClient);
   // REGISTER
   // =========================
   register(data: RegisterRequest) {
-    return this.http.post(`${this.baseUrl}/register`, data, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.baseUrl}/register`, data);
   }
 
   // =========================
   // LOGIN
   // =========================
   login(data: LoginRequest) {
-    return this.http.post(`${this.baseUrl}/login`, data, {
-      withCredentials: true
-    }).pipe(
-      tap(() => this._isAuthenticated.set(true))
-    );
+    return this.http.post(`${this.baseUrl}/login`, data)
+      .pipe(
+        tap(() => this._isAuthenticated.set(true))
+      );
   }
 
   // =========================
   // CHECK SESSION
   // =========================
   checkSession() {
-    return this.http.get(`${this.baseUrl}/me`, {
-    withCredentials: true
-  }).pipe(
+    return this.http.get(`${this.baseUrl}/me`).pipe(
     map(() => {
       this._isAuthenticated.set(true);
       return true;
@@ -58,20 +53,17 @@ private http = inject(HttpClient);
   // REFRESH TOKEN
   // =========================
   refresh() {
-    return this.http.post(`${this.baseUrl}/refresh`, {}, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.baseUrl}/refresh`, {});
   }
 
   // =========================
   // LOGOUT
   // =========================
   logout() {
-    return this.http.post(`${this.baseUrl}/logout`, {}, {
-      withCredentials: true
-    }).pipe(
-      tap(() => this._isAuthenticated.set(false))
-    );
+    return this.http.post(`${this.baseUrl}/logout`, {})
+      .pipe(
+        tap(() => this._isAuthenticated.set(false))
+      );
   }
 
   // =========================

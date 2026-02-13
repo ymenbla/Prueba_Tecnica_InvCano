@@ -63,7 +63,7 @@ namespace WebApiCanon.Features.Auth
             {
                 HttpOnly = true,
                 Secure = isProduction,
-                SameSite = SameSiteMode.None,// only strict to prevent CSRF
+                SameSite = SameSiteMode.Lax,// only strict to prevent CSRF
                 Expires = result.AccessTokenExpiresAt
             });
 
@@ -71,7 +71,7 @@ namespace WebApiCanon.Features.Auth
             {
                 HttpOnly = true,
                 Secure = isProduction,
-                SameSite = SameSiteMode.None,
+                SameSite = SameSiteMode.Lax,
                 Expires = result.RefreshTokenExpiresAt
             });
         }
