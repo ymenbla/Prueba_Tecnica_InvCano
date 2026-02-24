@@ -1,0 +1,49 @@
+<button mat-icon-button [matMenuTriggerFor]="userMenu" class="btn-user-menu">
+  <mat-icon>account_circle</mat-icon>
+</button>
+<mat-menu #userMenu="matMenu" class="user-menu">
+  <!-- USER INFO -->
+  <div class="user-info">
+    <span class="user-name">{{ user().name }}</span>
+    <span>{{ user().role }}</span>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- ACCOUNT -->
+  <button mat-menu-item>
+    <mat-icon>person</mat-icon>
+    <span>Mi Perfil</span>
+  </button>
+
+  <!-- <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Configuración</span>
+  </button> -->
+
+  <!-- <button mat-menu-item>
+    <mat-icon>security</mat-icon>
+    <span>Seguridad</span>
+  </button> -->
+
+  <!-- <mat-divider></mat-divider> -->
+
+  <!-- SUPPORT -->
+  <!-- <button mat-menu-item>
+    <mat-icon>help_outline</mat-icon>
+    <span>Centro de ayuda</span>
+  </button> -->
+
+  <button mat-menu-item>
+    <mat-icon>support_agent</mat-icon>
+    <span>Soporte técnico</span>
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <!-- LOGOUT -->
+  <button mat-menu-item class="logout-btn">
+    <mat-icon>logout</mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+</mat-menu>

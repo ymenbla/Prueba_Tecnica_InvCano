@@ -1,0 +1,36 @@
+<mat-nav-list>
+  @for (item of menuItems; track item.id) {
+
+
+    @if (item.submenu?.length) {
+      <mat-expansion-panel class="submenu-panel" hideToggle>
+        <mat-expansion-panel-header class="submenu-panel-header">
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.label }}</span>
+          <mat-icon class="icon-more">expand_more</mat-icon>
+        </mat-expansion-panel-header>
+
+        @for (subItem of item.submenu; track subItem.id) {
+          <a mat-list-item
+             class="submenu-item"
+             [routerLink]="subItem.route"
+             routerLinkActive="active-link">
+            {{ subItem.label }}
+          </a>
+        }
+      </mat-expansion-panel>
+    }@else {
+      <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.label }}</span>
+        <!-- @if (item.badge === 'new') {
+          <span class="badge new-badge">Nuevo</span>
+        }
+        @if (item.badge === 'updated') {
+          <span class="badge updated-badge">Actualizado</span>
+        } -->
+      </a>
+    }
+  }
+
+</mat-nav-list>

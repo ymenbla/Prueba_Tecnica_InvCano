@@ -1,0 +1,53 @@
+<button
+  mat-icon-button
+  class="btn-notifications"
+  [matMenuTriggerFor]="notificationsMenu"
+  >
+
+  <mat-icon
+
+  [matBadge]="unreadCount()"
+  matBadgeSize="small"
+  matBadgeColor="warn"
+  [matBadgeHidden]="unreadCount() === 0">notifications</mat-icon>
+</button>
+
+<mat-menu #notificationsMenu="matMenu" class="notifications-menu">
+
+  <div class="notifications-header">
+    Notificaciones
+  </div>
+
+  <mat-divider></mat-divider>
+
+  @if (notifications().length > 0) {
+
+    <mat-list>
+      @for (notification of notifications(); track notification.id) {
+
+        <mat-list-item
+          (click)="markAsRead(notification.id)"
+          [class.unread]="!notification.read">
+
+          <div matLine class="primary">{{ notification.title }}</div>
+          <div matLine class="secondary">
+            {{ notification.message }}
+          </div>
+          <div matLine class="date">
+            {{ notification.date | date:'short' }}
+          </div>
+
+        </mat-list-item>
+
+      }
+    </mat-list>
+
+  } @else {
+
+    <div class="empty-state">
+      No tienes notificaciones
+    </div>
+
+  }
+
+</mat-menu>

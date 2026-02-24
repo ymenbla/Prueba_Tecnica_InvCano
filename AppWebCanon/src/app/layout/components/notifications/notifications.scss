@@ -1,0 +1,56 @@
+.btn-notifications {
+  color: var(--mat-sys-primary);
+  margin-right: 5px;
+}
+
+::ng-deep .notifications-menu {
+  &.mat-mdc-menu-panel {
+    width: 250px !important;
+    max-height: 400px;
+    overflow: auto;
+    background-color: var(--mat-sys-background);
+    border-radius: var(--mat-fab-small-container-shape, var(--mat-sys-corner-medium));
+  }
+
+  .mdc-list-item.mdc-list-item--with-one-line {
+    height: var(--mat-list-list-item-one-line-container-height, 75px);
+  }
+}
+.notifications-header {
+  padding: 12px 16px;
+  font-weight: 500;
+}
+
+.unread {
+  background-color: var(--mat-sys-primary-container);
+  border-left: 2px solid var(--mat-sys-primary);
+
+  .primary {
+    color: var(--mat-sys-primary);
+    font-weight: 400;
+  }
+  .date {
+    font-style: italic;
+  }
+}
+
+.primary {
+  font-size: 12px;
+}
+.secondary {
+  font-size: 11px;
+  color: gray;
+}
+
+.date {
+  font-size: 10px;
+  color: #999;
+}
+
+.empty-state {
+  padding: 20px;
+  text-align: center;
+  color: gray;
+}
+
+

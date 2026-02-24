@@ -18,8 +18,8 @@
     "paths": {
       "@environments/*": ["./environments/*"],
       "@auth/*": ["./app/auth/*"],
-      // "@assets/*": ["./assets/*"],
-      // "@shared/*": ["./app/shared/*"],
+      "@features/*": ["./app/features/*"],
+      "@shared/*": ["./app/shared/*"],
       "@core/*": ["./app/core/*"]
 
     }

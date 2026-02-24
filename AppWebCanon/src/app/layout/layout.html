@@ -8,41 +8,27 @@
       </div>
     </mat-toolbar>
 
-    <mat-nav-list>
-      <a mat-list-item routerLink="/app/machines" routerLinkActive="active-link">
-        <mat-icon matListItemIcon>precision_manufacturing</mat-icon>
-        <span matListItemTitle>Telares</span>
-      </a>
-      <a mat-list-item routerLink="/app/daily-production" routerLinkActive="active-link">
-        <mat-icon matListItemIcon>trolley</mat-icon>
-        <span matListItemTitle>Producción Diaria</span>
-      </a>
-      <a mat-list-item routerLink="/app/metrics" routerLinkActive="active-link">
-        <mat-icon matListItemIcon>bar_chart</mat-icon>
-        <span matListItemTitle>Métricas</span>
-      </a>
-
-    </mat-nav-list>
+    <app-sidenav />
   </mat-drawer>
 
   <!-- Main Content -->
   <mat-drawer-content>
     <mat-toolbar class="topbar">
-      <button mat-icon-button (click)="toggleSidebar()">
+      <button mat-icon-button class="btn-custom" (click)="toggleSidebar()">
         <mat-icon>{{ sidebarOpen() ? 'chevron_left' : 'menu' }}</mat-icon>
       </button>
-      <span class="app-title"></span>
+      <span class="app-title">
+        <mat-icon>{{ topInfo().icon }}</mat-icon>
+        {{ topInfo().title }}
+      </span>
       <span class="spacer"></span>
-      <button mat-icon-button>
-        <mat-icon>notifications</mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon>account_circle</mat-icon>
-      </button>
+
+      <app-notifications></app-notifications>
+      <app-user-menu></app-user-menu>
     </mat-toolbar>
 
-    <div class="content">
+    <section class="content">
       <router-outlet></router-outlet>
-    </div>
+    </section>
   </mat-drawer-content>
 </mat-drawer-container>
