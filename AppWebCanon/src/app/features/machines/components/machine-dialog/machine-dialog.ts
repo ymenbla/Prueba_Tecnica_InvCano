@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MachinesService } from '../../machines-service';
+import { MachinesService } from '../../services/machines-service';
 import { CreateMachineRequest } from '../../types/machine.interface';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 

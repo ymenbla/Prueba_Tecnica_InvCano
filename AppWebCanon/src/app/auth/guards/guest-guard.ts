@@ -7,10 +7,18 @@ export const guestGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
+  const isAuth = authService.isAuthenticated();
+
+  const redirectUrlApp = '/app';
+
+  if (typeof isAuth === 'boolean') {
+    return isAuth ? router.createUrlTree([redirectUrlApp]) : true;
+  }
+
   return authService.checkSession().pipe(
     map(isAuthenticated =>
       isAuthenticated
-        ? router.createUrlTree(['/app'])
+        ? router.createUrlTree([redirectUrlApp])
         : true
     )
   );

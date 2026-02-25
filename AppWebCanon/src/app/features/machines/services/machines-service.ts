@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { CreateMachineRequest, Machine } from './types/machine.interface';
+import { CreateMachineRequest, Machine } from '../types/machine.interface';
 import { Observable } from 'rxjs';
 import { environment as env } from '@environments/environment';
 

@@ -11,8 +11,7 @@ export class AuthService {
 
 private http = inject(HttpClient);
 
-  private _isAuthenticated = signal(false);
-  isAuthenticated = this._isAuthenticated.asReadonly();
+  private _isAuthenticated = signal<boolean | null>(null);
 
   private baseUrl = `${env.API_URL}/auth`;
 
@@ -37,22 +36,29 @@ private http = inject(HttpClient);
   // CHECK SESSION
   // =========================
   checkSession() {
+
+    if (this._isAuthenticated()!== null) {
+      return of(this._isAuthenticated());
+    }
+
     return this.http.get(`${this.baseUrl}/me`).pipe(
-    map(() => {
-      this._isAuthenticated.set(true);
-      return true;
-    }),
-    catchError(() => {
-      this._isAuthenticated.set(false);
-      return of(false);
-    })
-  );
+      map(() => {
+
+        this._isAuthenticated.set(true);
+        return true;
+      }),
+      catchError((err) => {
+
+        this._isAuthenticated.set(false);
+        return of(false);
+      })
+    );
   }
 
   // =========================
   // REFRESH TOKEN
   // =========================
-  refresh() {
+  refreshSession() {
     return this.http.post(`${this.baseUrl}/refresh`, {});
   }
 
@@ -67,9 +73,11 @@ private http = inject(HttpClient);
   }
 
   // =========================
-  // SYNC ACCESS (GUARD)
+  // Is AUTHENTICATED
   // =========================
-  isAuthenticatedSync(): boolean {
+
+  isAuthenticated() {
     return this._isAuthenticated();
   }
+
 }

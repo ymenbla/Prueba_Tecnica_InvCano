@@ -1,5 +1,5 @@
 export interface Machine {
-  id: number;
+  machineId: number;
   code: string;
   name: string;
   isActive: boolean;

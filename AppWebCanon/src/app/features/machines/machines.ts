@@ -6,34 +6,41 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSlideToggleModule, MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MachineDialog } from './components/machine-dialog/machine-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { Machine } from './types/machine.interface';
-import { MachinesService } from './machines-service';
+import { MachinesService } from './services/machines-service';
+import { ConfirmDialogService } from '@shared/components/confirm-dialog/services/confirm-dialog-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-machines',
   imports: [
     MatCardModule, MatIconModule, MatButtonModule,
-    MatFormFieldModule, MatInputModule, MatTableModule,
+    MatFormFieldModule, MatTableModule,
     MatSortModule, MatPaginatorModule, MatSlideToggleModule,
-    MatDividerModule
+    // MatInputModule, MatDividerModule
   ],
   templateUrl: './machines.html',
   styleUrl: './machines.scss',
 })
 export class Machines implements AfterViewInit {
 
+  // services
   private readonly machinesService = inject(MachinesService);
-  readonly dialog = inject(MatDialog);
+  private readonly confirmDialogService = inject(ConfirmDialogService);
 
+  //material components
+  private readonly snackbar = inject(MatSnackBar);
+  readonly dialog = inject(MatDialog);
   displayedColumns: string[] = ['machineId', 'code', 'name', 'isActive'];
   dataSource = new MatTableDataSource<Machine>([]);
 
+  //signals
   readonly machines = signal<Machine[]>([]);
   readonly loading = signal(false);
 
@@ -69,12 +76,12 @@ export class Machines implements AfterViewInit {
     this.machinesService.getMachines().subscribe({
       next: machines => {
         this.machines.set(machines);
-        this.loading.set(false);
       },
       error: err => {
         console.error(err);
-        this.loading.set(false);
-      }
+        //mensaje de error al usuario
+      },
+      complete: () => this.loading.set(false)
     });
   }
 
@@ -91,5 +98,42 @@ export class Machines implements AfterViewInit {
       }
     });
   }
-}
 
+  onToggleClick(event: MatSlideToggleChange, machine: Machine) {
+
+    console.log('Toggle clicked event:', event);
+
+    const title = machine.isActive
+      ? 'Confirmar desactivación'
+      : 'Confirmar activación';
+
+    const message = machine.isActive
+      ? '¿Estás seguro de que deseas desactivar esta máquina?'
+      : '¿Deseas activar esta máquina?';
+
+    this.confirmDialogService.confirm(title, message)
+      .subscribe(confirmed => {
+        console.log('Usuario confirmó:', confirmed);
+        if (!confirmed) { event.source.checked = machine.isActive; return;};
+
+        this.machinesService
+          .disableMachine(machine.machineId)
+          .subscribe({
+
+            next: () => {
+              this.snackbar.open('Estado de máquina actualizado', 'Cerrar', { duration: 3000 });
+              this.machines.update(list =>
+                list.map(m =>
+                  m.machineId === machine.machineId
+                    ? { ...m, isActive: !m.isActive }
+                    : m
+                )
+              );
+
+            }
+
+          });
+
+      });
+  }
+}
