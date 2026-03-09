@@ -12,8 +12,8 @@ using WebApiCanon.Data;
 namespace WebApiCanon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260202231501_UpdateRefreshTokenField")]
-    partial class UpdateRefreshTokenField
+    [Migration("20260227194511_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -59,7 +59,17 @@ private http = inject(HttpClient);
   // REFRESH TOKEN
   // =========================
   refreshSession() {
-    return this.http.post(`${this.baseUrl}/refresh`, {});
+    return this.http.post(`${this.baseUrl}/refresh`, {}).pipe(
+      map(() => {
+        this._isAuthenticated.set(true);
+        return true;
+      }),
+      catchError((err) => {
+
+        this._isAuthenticated.set(false);
+        return of(false);
+      })
+    );
   }
 
   // =========================

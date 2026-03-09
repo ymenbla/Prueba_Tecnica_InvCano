@@ -1,0 +1,94 @@
+<h2 mat-dialog-title class="dialog-title">
+  <mat-icon>factory</mat-icon>
+  <span>Nueva Producción</span>
+</h2>
+
+<mat-dialog-content class="dialog-content">
+
+  <!-- CONTEXT HEADER -->
+  <div class="context-card">
+    <div class="context-item">
+      <mat-icon>precision_manufacturing</mat-icon>
+      <div>
+        <div class="context-label">Maquina</div>
+        <div class="context-value">
+          {{ data.machine.code }} - {{ data.machine.name }}
+        </div>
+      </div>
+    </div>
+
+    <div class="context-item">
+      <mat-icon>calendar_month</mat-icon>
+      <div>
+        <div class="context-label">Fecha</div>
+        <div class="context-value">
+          {{ data.date | date: 'yyyy-MM-dd' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <form [formGroup]="form" class="form-grid" (change)="onChangeform()">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Meta de Produccion</mat-label>
+      <input matInput type="number" formControlName="targetUnits">
+      @if (f.targetUnits.touched && f.targetUnits.errors?.['mismatch']) {
+        <mat-error>{{ f.targetUnits.errors?.['mismatch'] }}</mat-error>
+      }
+      @if (f.targetUnits.touched && f.targetUnits.errors?.['empty']) {
+        <mat-error>{{ f.targetUnits.errors?.['empty'] }}</mat-error>
+      }
+      @if (f.targetUnits.touched && f.targetUnits.errors?.['negative']) {
+        <mat-error>{{ f.targetUnits.errors?.['negative'] }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Unidades Buenas</mat-label>
+      <input matInput type="number" formControlName="okUnits">
+      @if (f.okUnits.touched && f.okUnits.errors?.['empty']) {
+        <mat-error>{{ f.okUnits.errors?.['empty'] }}</mat-error>
+      }
+      @if (f.okUnits.touched && f.okUnits.errors?.['negative']) {
+        <mat-error>{{ f.okUnits.errors?.['negative'] }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Unidades Defectuosas</mat-label>
+      <input matInput type="number" formControlName="defectUnits">
+      @if (f.defectUnits.touched && f.defectUnits.errors?.['empty']) {
+        <mat-error>{{ f.defectUnits.errors?.['empty'] }}</mat-error>
+      }
+      @if (f.defectUnits.touched && f.defectUnits.errors?.['negative']) {
+        <mat-error>{{ f.defectUnits.errors?.['negative'] }}</mat-error>
+      }
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="close()">
+    Cancelar
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid || saving()"
+    (click)="save()">
+    @if (!saving()) {
+      Guardar Producción
+    }@else {
+      <mat-progress-spinner
+        diameter="20"
+        mode="indeterminate"
+        color="accent">
+      </mat-progress-spinner>
+    }
+  </button>
+</mat-dialog-actions>

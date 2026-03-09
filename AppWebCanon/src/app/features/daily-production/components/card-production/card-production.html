@@ -1,0 +1,110 @@
+<mat-card appearance="outlined" class="table-card">
+  <mat-card-header>
+    <div class="context-card">
+      <div>
+        <mat-card-title>Registro de Producción</mat-card-title>
+        <mat-card-subtitle>Consulta y registra la producción diaria del telar seleccionado</mat-card-subtitle>
+      </div>
+      <div class="context-item">
+        <mat-icon>precision_manufacturing</mat-icon>
+        <div>
+          <div class="context-label">Maquina</div>
+          <div class="context-value">
+            @if(machine()){
+              {{ machine()?.code }} - {{ machine()?.name }}
+            }@else{
+              No Seleccionado
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+
+    <!-- <span class="machine-detail">(MM/DD/YYYY - MM/DD/YYYY) Codigo / nombre</span> -->
+    <section class="machine-info">
+      <!-- openAddDailyProductionDialog() -->
+      <button matButton="filled" color="primary" [disabled]="!machine() || !date.value" (click)="openModal()">
+        <mat-icon>add</mat-icon>
+        Producción
+      </button>
+
+
+      <mat-form-field>
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="date" (dateChange)="changeDate($event)">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+    </section>
+
+    <section class="table-wrapper">
+
+      <table mat-table [dataSource]="dataSourceDP" matSort>
+
+        <!-- index -->
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef>#</th>
+          <td mat-cell *matCellDef="let row; let i = index">
+            {{ i + 1 }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <!-- date -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+          <td mat-cell *matCellDef="let row">{{ row.date }}</td>
+          <td mat-footer-cell *matFooterCellDef> Totales </td>
+        </ng-container>
+
+        <!-- Target units -->
+        <ng-container matColumnDef="targetUnits">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Meta Produccion</th>
+          <td mat-cell *matCellDef="let row">{{ row.targetUnits }}</td>
+          <td mat-footer-cell *matFooterCellDef> {{ calculateTotals('targetUnits') }} </td>
+        </ng-container>
+
+        <!-- Ok units -->
+        <ng-container matColumnDef="okUnits">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Und Buenas</th>
+          <td mat-cell *matCellDef="let row">{{ row.okUnits }}</td>
+          <td mat-footer-cell *matFooterCellDef> {{ calculateTotals('okUnits') }} </td>
+        </ng-container>
+
+        <!-- Defect units -->
+        <ng-container matColumnDef="defectUnits">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Und Defectuosas</th>
+          <td mat-cell *matCellDef="let row">{{ row.defectUnits }}</td>
+          <td mat-footer-cell *matFooterCellDef> {{ calculateTotals('defectUnits') }} </td>
+        </ng-container>
+
+        <!-- Defect units -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+
+            <button mat-icon-button color="warn" (click)="disableProduction(row)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+          <td mat-footer-cell *matFooterCellDef> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsDProduction; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsDProduction;"></tr>
+        <tr mat-footer-row *matFooterRowDef="columnsDProduction"></tr>
+        <tr *matNoDataRow>
+          <td class="mat-cell no-data-cell" [attr.colspan]="columnsDProduction.length">
+            No hay producciones registradas
+          </td>
+        </tr>
+
+      </table>
+    </section>
+
+  </mat-card-content>
+</mat-card>

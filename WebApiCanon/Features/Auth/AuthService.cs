@@ -89,7 +89,7 @@ namespace WebApiCanon.Features.Auth
                 u.Id == userId &&
                 u.RefreshTokenExpiresAt > DateTime.UtcNow);
 
-            if (user == null || user.RefreshTokenHash == null)
+            if (user == null || user?.RefreshTokenHash == null)
                 throw new UnauthorizedAccessException("Invalid refresh token");
 
             // 3️. Verificar hash en memoria

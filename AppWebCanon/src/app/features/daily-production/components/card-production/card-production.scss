@@ -1,0 +1,33 @@
+.machine-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Context Card */
+.context-card {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.context-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--mat-sys-surface-container-low);
+  padding: 10px 15px;
+  border-radius: .8rem;
+}
+
+.context-label {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.context-value {
+  font-weight: 500;
+}

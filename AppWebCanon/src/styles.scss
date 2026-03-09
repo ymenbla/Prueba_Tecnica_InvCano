@@ -46,16 +46,21 @@ body {
 
  table {
   width: 100%;
+  background: none;
 }
 
 
 td.mat-mdc-cell {
-  // padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--mat-sys-surface-dim);
 }
 
+tr.mat-mdc-row {
+  background-color: var(--mat-sys-on-secondary);
+  transition: background-color 0.3s ease;
+}
+
 tr.mat-mdc-row:hover {
-  background: var(--mat-sys-surface-container-low)
+  background: var(--mat-sys-surface-container-low);
 }
 
 /* Custom styles for buttons */
@@ -67,6 +72,20 @@ button.btn-custom { // only use with buttons mat-icon-button
   .mat-mdc-button-persistent-ripple{
     border-radius: var(--mat-fab-small-container-shape, var(--mat-sys-corner-medium));
   }
+}
+
+
+// Card styles
+mat-card {
+  background-color: var(--mat-sys-on-secondary) !important;
+}
+mat-card-title {
+  font-size: 1.25rem !important;
+  font-weight: 500 !important;
+}
+mat-card-subtitle {
+  font-size: .8rem !important;
+  color: var(--mat-sys-secondary) !important;
 }
 
 

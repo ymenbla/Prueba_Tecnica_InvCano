@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 using WebApiCanon.Features.Productions.DTOs;
 
 namespace WebApiCanon.Features.Productions
@@ -19,7 +20,8 @@ namespace WebApiCanon.Features.Productions
 
         // GET
         [HttpGet]
-        public async Task<IActionResult> Get(
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<DailyProductionResponseDto>>> Get(
             [FromQuery] long machineId,
             [FromQuery] DateOnly from,
             [FromQuery] DateOnly to)
@@ -33,7 +35,8 @@ namespace WebApiCanon.Features.Productions
 
         // POST
         [HttpPost]
-        public async Task<IActionResult> Create(
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<ActionResult<DailyProductionResponseDto>> Create(
             [FromBody] CreateDailyProductionDto dto)
         {
             var created = await _service.CreateAsync(dto);
@@ -44,6 +47,7 @@ namespace WebApiCanon.Features.Productions
 
         // PUT disable
         [HttpPut("{dailyProductionId:long}/disable")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Disable(long dailyProductionId)
         {
             var success = await _service.DisableAsync(dailyProductionId);

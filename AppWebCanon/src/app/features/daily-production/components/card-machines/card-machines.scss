@@ -1,0 +1,23 @@
+.filter-table {
+  padding-top: .8rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  .filter-input {
+    width: 100%;
+  }
+
+}
+
+tr.mat-mdc-row:hover {
+  cursor: pointer;
+}
+
+.row-selected {
+  font-weight: 500;
+  background-color: var(--mat-sys-primary-container);
+  color : var(--mat-sys-primary);
+}

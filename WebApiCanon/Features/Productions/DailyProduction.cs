@@ -22,6 +22,7 @@ namespace WebApiCanon.Features.Productions
         public int DefectUnits { get; set; }
 
         public bool IsActive { get; set; } = true;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public MachineItems Machine { get; set; } = null!;
     }

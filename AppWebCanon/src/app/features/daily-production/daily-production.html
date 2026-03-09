@@ -1,1 +1,17 @@
-<p>daily-production works!</p>
+
+<div class="page-content">
+  <div class="section-machines">
+    <app-card-machines
+      [machines]="machines()"
+      (machineSelected)="onMachineSelected($event)">
+    </app-card-machines>
+  </div>
+  <div class="section-daily-production">
+    <app-card-production
+      [machine]="machineSelected()"
+      [production]="dailyProduction()"
+      (productionDate)="onProductionDateSelected($event)"
+      (disabledProduction)="onProductionDisabled($event)">
+    </app-card-production>
+  </div>
+</div>

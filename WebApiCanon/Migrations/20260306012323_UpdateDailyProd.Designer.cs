@@ -12,8 +12,8 @@ using WebApiCanon.Data;
 namespace WebApiCanon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260201201318_NewUserTable")]
-    partial class NewUserTable
+    [Migration("20260306012323_UpdateDailyProd")]
+    partial class UpdateDailyProd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,6 +58,9 @@ namespace WebApiCanon.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DailyProductionId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
@@ -112,11 +115,11 @@ namespace WebApiCanon.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RefreshToken")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RefreshTokenExpiresAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("RefreshTokenHash")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

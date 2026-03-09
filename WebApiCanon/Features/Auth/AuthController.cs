@@ -18,7 +18,7 @@ namespace WebApiCanon.Features.Auth
 
         [HttpGet("me")]
         [Authorize]
-        public async Task<IActionResult> Me()
+        public async Task<ActionResult<UserInfoResponseDto>> Me()
         {
             var user = await _authService.GetCurrentUserAsync(User);
 
