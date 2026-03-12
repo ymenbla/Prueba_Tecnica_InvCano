@@ -1,0 +1,128 @@
+.page-content {
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.content-container {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* FILTROS */
+
+.filters-card {
+  padding: 16px 0;
+}
+
+.page-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-btn {
+  height: 56px;
+  margin-bottom: 15px;
+}
+
+/* KPIs PRINCIPALES */
+
+.kpi-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 16px;
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+
+.kpi-card:hover {
+  transform: translateY(-3px);
+}
+
+.kpi-card mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.kpi-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.kpi-label {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* COLORES KPI */
+
+.quality {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.achievement {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.score {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+/* METRICAS PRODUCCION */
+
+.production-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.metric-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-radius: 14px;
+  transition: box-shadow 0.2s;
+}
+
+.metric-card:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.metric-card mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  opacity: 0.7;
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.metric-label {
+  font-size: 13px;
+  opacity: 0.7;
+}

@@ -74,5 +74,21 @@ namespace WebApiCanon.Features.Metrics
             ?? new MachineMetricsResponseDto();
 
         }
+
+        public async Task<IEnumerable<MachineProductionResponseDto>> GetMechinesWithProductionAsync(
+            DateOnly from,
+            DateOnly to)
+        {
+            return await _context.DailyProductions
+                    .Where(dp => dp.Date >= from && dp.Date <= to && dp.IsActive)
+                    .Select(dp => new MachineProductionResponseDto
+                    {
+                        MachineId = dp.Machine.MachineId,
+                        Code = dp.Machine.Code,
+                        Name = dp.Machine.Name
+                    })
+                    .Distinct()
+                    .ToListAsync();
+        }
     }
 }

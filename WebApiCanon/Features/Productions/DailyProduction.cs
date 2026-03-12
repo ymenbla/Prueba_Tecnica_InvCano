@@ -24,6 +24,7 @@ namespace WebApiCanon.Features.Productions
         public bool IsActive { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+        [ForeignKey("MachineId")]
         public MachineItems Machine { get; set; } = null!;
     }
 }
