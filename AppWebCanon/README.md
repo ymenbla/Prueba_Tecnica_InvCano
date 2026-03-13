@@ -1,59 +1,129 @@
-# AppWebCanon
+# 🌐 AppWebCanon - Frontend SPA
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+Aplicación web de página única (**SPA**) construida con **Angular 21** para la gestión y visualización de métricas de producción de máquinas industriales.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🛠️ Tecnologías
 
-```bash
-ng serve
+| Paquete / Framework       | Versión   | Rol                                        |
+|---------------------------|-----------|--------------------------------------------|
+| Angular                   | ~21.1.0   | Framework principal de la SPA              |
+| Angular Material + CDK    | ~21.1.3   | Componentes UI y utilidades de accesibilidad |
+| Angular Router            | ~21.1.0   | Navegación entre vistas                    |
+| Angular Forms             | ~21.1.0   | Manejo de formularios reactivos            |
+| RxJS                      | ~7.8.0    | Programación reactiva y manejo de eventos  |
+| TypeScript                | ~5.9.2    | Lenguaje tipado                            |
+| Angular CLI               | ~21.1.1   | Herramienta de scaffolding y build         |
+| Vitest                    | ~4.0.8    | Framework de pruebas unitarias             |
+| Node.js                   | 22.x      | Runtime requerido                          |
+| npm                       | 10.9.2    | Gestor de paquetes                         |
+
+---
+
+## 🗂️ Estructura del Proyecto
+
+```
+AppWebCanon/
+├── src/
+│   ├── app/                  # Módulos, componentes, servicios y rutas
+│   ├── environments/         # Variables de entorno (dev / prod)
+│   ├── index.html            # HTML principal
+│   ├── main.ts               # Bootstrap de la aplicación
+│   └── styles.scss           # Estilos globales
+├── public/                   # Recursos estáticos (íconos, imágenes)
+├── angular.json              # Configuración del workspace de Angular CLI
+├── package.json              # Dependencias del proyecto
+├── tsconfig.json             # Configuración de TypeScript
+├── Dockerfile                # Imagen Docker para desarrollo
+└── README.md
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Ejecución
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Con Docker (recomendado)
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Desde la **carpeta raíz** del repositorio:
 
 ```bash
-ng generate --help
+docker compose up --build -d
 ```
 
-## Building
+La aplicación estará disponible en **http://localhost:4200** y con **hot-reload automático** al modificar el código fuente.
 
-To build the project run:
+---
+
+### Local sin Docker
+
+**Pre-requisitos:** Node.js 22.x, npm 10.9.2
+
+#### 1. Instalar dependencias
 
 ```bash
-ng build
+cd AppWebCanon
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+#### 2. Ejecutar en modo desarrollo
 
 ```bash
-ng test
+npm start
+# equivalente a: ng serve
 ```
 
-## Running end-to-end tests
+La aplicación estará disponible en **http://localhost:4200**.
 
-For end-to-end (e2e) testing, run:
+#### 3. Build de producción
 
 ```bash
-ng e2e
+npm run build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+El resultado se genera en la carpeta `dist/`.
 
-## Additional Resources
+#### 4. Ejecutar pruebas unitarias
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm test
+```
+
+---
+
+## 🔧 Variables de Entorno
+
+Los archivos de entorno se encuentran en `src/environments/`:
+
+| Archivo                         | Descripción                   |
+|---------------------------------|-------------------------------|
+| `environment.ts`                | Configuración de desarrollo   |
+| `environment.production.ts`     | Configuración de producción   |
+
+Ajusta la URL base del backend en esos archivos según tu entorno:
+
+```typescript
+// environment.ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/api'
+};
+```
+
+---
+
+## 🧩 Comandos útiles de Angular CLI
+
+```bash
+# Generar un componente
+ng generate component features/mi-componente
+
+# Generar un servicio
+ng generate service core/services/mi-servicio
+
+# Generar una interfaz
+ng generate interface shared/models/mi-modelo
+
+# Verificar el proyecto (lint)
+ng lint
+```

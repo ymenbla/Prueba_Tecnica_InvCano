@@ -12,20 +12,30 @@ services:
       - "1433:1433"
     volumes:
       - mssql_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Mssql2022*' -Q 'SELECT 1' -No -C || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: on-failure
 
   backend:
     container_name: canon_api
     build:
       context: ./WebApiCanon
       dockerfile: Dockerfile
+      args:
+        BUILD_CONFIGURATION: Debug
     ports:
       - "8080:8080"
     depends_on:
-      - mssql
+      mssql:
+        condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=CanonDb;User Id=sa;Password=Mssql2022*;TrustServerCertificate=True;
-    restart: always
+    restart: on-failure
 
   frontend:
     container_name: canon_webapp
@@ -34,9 +44,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4200:4200"
+    volumes:
+      - ./AppWebCanon:/app
+      - /app/node_modules
     depends_on:
       - backend
-    restart: always
+    restart: on-failure
 
 volumes:
   mssql_data:
